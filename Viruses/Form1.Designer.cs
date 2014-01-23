@@ -39,6 +39,7 @@
             this.AntiViral2 = new System.Windows.Forms.Button();
             this.AntiViral1 = new System.Windows.Forms.Button();
             this.panelViruses = new System.Windows.Forms.Panel();
+            this.TimeSurvived = new System.Windows.Forms.Label();
             this.tryAgain = new System.Windows.Forms.Button();
             this.ComputerCrashed = new System.Windows.Forms.Label();
             this.Virus12 = new System.Windows.Forms.Button();
@@ -153,6 +154,7 @@
             // 
             // panelViruses
             // 
+            this.panelViruses.Controls.Add(this.TimeSurvived);
             this.panelViruses.Controls.Add(this.tryAgain);
             this.panelViruses.Controls.Add(this.ComputerCrashed);
             this.panelViruses.Controls.Add(this.Virus12);
@@ -171,6 +173,15 @@
             this.panelViruses.Name = "panelViruses";
             this.panelViruses.Size = new System.Drawing.Size(716, 341);
             this.panelViruses.TabIndex = 6;
+            // 
+            // TimeSurvived
+            // 
+            this.TimeSurvived.AutoSize = true;
+            this.TimeSurvived.Location = new System.Drawing.Point(224, 130);
+            this.TimeSurvived.Name = "TimeSurvived";
+            this.TimeSurvived.Size = new System.Drawing.Size(35, 13);
+            this.TimeSurvived.TabIndex = 14;
+            this.TimeSurvived.Text = "label5";
             // 
             // tryAgain
             // 
@@ -422,6 +433,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button tryAgain;
         private System.Windows.Forms.Label ComputerCrashed;
+        private System.Windows.Forms.Label TimeSurvived;
     }
 }
 
