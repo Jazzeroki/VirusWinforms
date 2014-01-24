@@ -54,8 +54,10 @@ namespace Viruses
             DisableFoodAndAntiviralButtons();
             InitializeFood();
             InitializeAntiViral();
+            InitializeActiveViruses();
             HideEnd();
             SpawnVirus();
+            //UpdateVirusesUI();
             //Virus1.Show();
 
         }
@@ -145,51 +147,14 @@ namespace Viruses
                 foreach (KeyValuePair<int, Virus> l in activeViruses)
                 {
                     activeViruses[l.Key].TimerDecrement();
+                    UpdateVirusesUI(l.Key);
                     //if (activeViruses[l.Key].happinessLevel <= 0)
                     //    deadViruses++;
                     if (activeViruses[l.Key].happinessLevel > 0)
                     {
-                        switch (l.Key)
-                        {
-                            case 1:
-                                Virus1.BackColor = GetVirusBackGroundColor(1);
-                                break;
-                            case 2:
-                                Virus2.BackColor = GetVirusBackGroundColor(2);
-                                break;
-                            case 3:
-                                Virus3.BackColor = GetVirusBackGroundColor(3);
-                                break;
-                            case 4:
-                                Virus4.BackColor = GetVirusBackGroundColor(4);
-                                break;
-                            case 5:
-                                Virus5.BackColor = GetVirusBackGroundColor(5);
-                                break;
-                            case 6:
-                                Virus5.BackColor = GetVirusBackGroundColor(6);
-                                break;
-                            case 7:
-                                Virus7.BackColor = GetVirusBackGroundColor(7);
-                                break;
-                            case 8:
-                                Virus8.BackColor = GetVirusBackGroundColor(8);
-                                break;
-                            case 9:
-                                Virus9.BackColor = GetVirusBackGroundColor(9);
-                                break;
-                            case 10:
-                                Virus10.BackColor = GetVirusBackGroundColor(10);
-                                break;
-                            case 11:
-                                Virus11.BackColor = GetVirusBackGroundColor(11);
-                                break;
-                            case 12:
-                                Virus12.BackColor = GetVirusBackGroundColor(12);
-                                break;
-                        }
+                        KillVirus(l.Key);
+                        UpdateVirusesUI(l.Key);        
                     }
-                    RemoveVirusFromButton(l.Key);
 
                 }
 
@@ -257,107 +222,7 @@ namespace Viruses
          * Functions for Virus Controls Go Here
          * 
         */
-        /* private void SpawnVirus() 
-        {
-            int buttonNumber;
-            Random rand = new Random();
-            bool i = true;
-            if (activeViruses.Count < 12) //checks to see that maximum virus number has not been reached.
-            {
-                do //loop repeats until an unused entry is found
-                {
-                    buttonNumber = rand.Next(1, 13);
-                    if (activeViruses.ContainsKey(buttonNumber))
-                    {
-                        i = true;
-                    }
-                    else
-                        i = false;
-                } while (i == true);
-                //code to check that the button number isn't in use already, may also need to see if all buttons are full.
-                int option = rand.Next(1, 5);
-                switch (option)
-                { //Definitions of the different viruses
-                    case 1:
-                        activeViruses.Add(buttonNumber, new Virus(3, 1, 50, 25, "Nimda", 700));
-                        break;
-                    case 2:
-                        activeViruses.Add(buttonNumber, new Virus(4, 3, 50, 25, "Conficker", 1000));
-                        break;
-                    case 3:
-                        activeViruses.Add(buttonNumber, new Virus(1, 2, 50, 25, "Storm Worm", 800));
-                        break;
-                    case 4:
-                        activeViruses.Add(buttonNumber, new Virus(2, 1, 50, 25, "Chernobyl", 400));
-                        break;
-                }
-                switch (buttonNumber)
-                {
-                    case 1:
-                        //Virus1.Text = activeViruses.ElementAt(1).Value.virusType;
-                        Virus1.Text = activeViruses[1].virusType;
-                        Virus1.Show();
-                        Virus1.BackColor = GetVirusBackGroundColor(1);
-                        break;
-                    case 2:
-                        Virus2.Text = activeViruses[2].virusType;
-                        Virus2.Show();
-                        Virus2.BackColor = GetVirusBackGroundColor(2);
-                        break;
-                    case 3:
-                        Virus3.Text = activeViruses[3].virusType;
-                        Virus3.Show();
-                        Virus3.BackColor = GetVirusBackGroundColor(3);
-                        break;
-                    case 4:
-                        Virus4.Text = activeViruses[4].virusType;
-                        Virus4.Show();
-                        Virus4.BackColor = GetVirusBackGroundColor(4);
-                        break;
-                    case 5:
-                        Virus5.Text = activeViruses[5].virusType;
-                        Virus5.Show();
-                        Virus5.BackColor = GetVirusBackGroundColor(5);
-                        break;
-                    case 6:
-                        Virus6.Text = activeViruses[6].virusType;;
-                        Virus6.Show();
-                        Virus5.BackColor = GetVirusBackGroundColor(6);
-                        break;
-                    case 7:
-                        Virus7.Text = activeViruses[7].virusType;
-                        Virus7.Show();
-                        Virus7.BackColor = GetVirusBackGroundColor(7);
-                        break;
-                    case 8:
-                        Virus8.Text = activeViruses[8].virusType;
-                        Virus8.Show();
-                        Virus8.BackColor = GetVirusBackGroundColor(8);
-                        break;
-                    case 9:
-                        Virus9.Text = activeViruses[9].virusType;;
-                        Virus9.Show();
-                        Virus9.BackColor = GetVirusBackGroundColor(9);
-                        break;
-                    case 10:
-                        Virus10.Text = activeViruses[10].virusType;;
-                        Virus10.Show();
-                        Virus10.BackColor = GetVirusBackGroundColor(10);
-                        break;
-                    case 11:
-                        Virus11.Text = activeViruses[11].virusType;
-                        Virus11.Show();
-                        Virus11.BackColor = GetVirusBackGroundColor(11);
-                        break;
-                    case 12:
-                        Virus12.Text = activeViruses[12].virusType;
-                        Virus12.Show();
-                        Virus12.BackColor = GetVirusBackGroundColor(12);
-                        break;
-                }
-            }
-
-        } */
+        /*
         private void RemoveVirusFromButton(int btnNumber)
         {
             if (activeViruses[btnNumber].happinessLevel <= 0)
@@ -532,21 +397,7 @@ namespace Viruses
             }
             return color;
         }
-        private void VirusClicked(int btnNumber)
-        {
-            if (ActiveType != 0)
-            {
-                activeViruses[btnNumber].React(ActiveType, ActiveNumber);
-                ResetActiveTypeAndNumber();
-            }
-            else
-                activeViruses[btnNumber].Hit();
-            if (activeViruses[btnNumber].happinessLevel <= 0)
-                SpawnOnVirusDeath();
-            //MessageBox.Show("Increasing DeadVirus due to click");
-            //deadViruses++;
-
-        } //for use in the virus buttons when they're clicked
+        */
 
         // New Virus Methods
         private void InitializeActiveViruses() 
@@ -561,17 +412,19 @@ namespace Viruses
             int virusNumber = 0;
             Random rand = new Random();
             bool i = true;
-            do
+            do //whiledead viruses != 0
             {
-                do //loop repeats until an unused entry is found
+                do //loop repeats until an unused entry is found, while i = true
                 {
-                    virusNumber = rand.Next(1, 13);
+                    virusNumber = rand.Next(1, 13);  // sets i = true and restarts loop
                     if (activeViruses[virusNumber].virusActive == true)
                     {
                         i = true;
+                        //UpdateVirusesUI(virusNumber);
                     }
                     else
                     {
+                        //MessageBox.Show("spawning vurus");
                         i = false;
                         int option = rand.Next(1, 5);
                         switch (option)
@@ -651,43 +504,92 @@ namespace Viruses
                 {
                     case 1:
                         Virus1.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus1.Show();
                         break;
                     case 2:
                         Virus2.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus2.Show();
                         break;
                     case 3:
                         Virus3.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus3.Show();
                         break;
                     case 4:
                         Virus4.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus4.Show();
                         break;
                     case 5:
                         Virus5.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus5.Show();
                         break;
                     case 6:
-                        Virus5.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus6.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus6.Show();
                         break;
                     case 7:
                         Virus7.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus7.Show();
                         break;
                     case 8:
                         Virus8.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus8.Show();
                         break;
                     case 9:
                         Virus9.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus9.Show();
                         break;
                     case 10:
                         Virus10.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus10.Show();
                         break;
                     case 11:
                         Virus11.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus11.Show();
                         break;
                     case 12:
                         Virus12.BackColor = GetVirusBackGroundColor(virusNumber);
+                        Virus12.Show();
                         break;
                 }
 
             }
+        }
+        private void VirusClicked(int btnNumber)
+        {
+            if (ActiveType != 0)
+            {
+                activeViruses[btnNumber].React(ActiveType, ActiveNumber);
+                ResetActiveTypeAndNumber();
+            }
+            else
+                activeViruses[btnNumber].Hit();
+            UpdateVirusesUI(btnNumber);
+            //if (activeViruses[btnNumber].happinessLevel <= 0)
+            //int b = 0;
+            //SpawnOnVirusDeath();
+            //MessageBox.Show("Increasing DeadVirus due to click");
+            //deadViruses++;
+
+        } //for use in the virus buttons when they're clicked, calls UpdateVirusUI when done
+        private System.Drawing.Color GetVirusBackGroundColor(int i) //returns a color for the virus, but if the virus is 0 or less it also calls VirusDeath();
+        {
+            System.Drawing.Color color = new System.Drawing.Color();
+            int h = activeViruses[i].happinessLevel;
+            if (h >= 800)
+                color = System.Drawing.Color.Green;
+            if (h >= 600 && h < 800)
+                color = System.Drawing.Color.LightGreen;
+            if (h >= 400 && h < 600)
+                color = System.Drawing.Color.Yellow;
+            if (h >= 200 && h < 400)
+                color = System.Drawing.Color.Pink;
+            if (h > 0 && h < 200)
+                color = System.Drawing.Color.Red;
+            if (h <= 0)
+            {
+                color = System.Drawing.Color.Black;
+            }
+            return color;
         }
         //private void TimerVirusUpdate() {}
 
@@ -764,27 +666,30 @@ namespace Viruses
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Stop();
+            //timer1.Stop();
             IncrementFood();
             IncrementAntiViral();
             DecrementVirus();
-            SpawnForDeadViruses();
+            //SpawnForDeadViruses();
+            if (deadViruses > 0)
+                SpawnVirus();
             secondsSurvived++;
-            timer1.Start();
+            //UpdateVirusesUI();
+            //timer1.Start();
         }
 
         private void Virus1_Click(object sender, EventArgs e)
         {
             int btnNumber = 1;
             VirusClicked(btnNumber);
-            Virus1.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void Virus2_Click(object sender, EventArgs e)
         {
             int btnNumber = 2;
             VirusClicked(btnNumber);
-            Virus2.BackColor = GetVirusBackGroundColor(btnNumber);
+
 
         }
 
@@ -792,7 +697,7 @@ namespace Viruses
         {
             int btnNumber = 3;
             VirusClicked(btnNumber);
-            Virus3.BackColor = GetVirusBackGroundColor(btnNumber);
+
 
         }
         
@@ -800,7 +705,7 @@ namespace Viruses
         {
             int btnNumber = 4;
             VirusClicked(btnNumber);
-            Virus4.BackColor = GetVirusBackGroundColor(btnNumber);
+
 
         }
         
@@ -808,7 +713,7 @@ namespace Viruses
         {
             int btnNumber = 5;
             VirusClicked(btnNumber);
-            Virus5.BackColor = GetVirusBackGroundColor(btnNumber);
+
 
         }
 
@@ -816,49 +721,49 @@ namespace Viruses
         {
             int btnNumber = 6;
             VirusClicked(btnNumber);
-            Virus6.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void Virus7_Click(object sender, EventArgs e)
         {
             int btnNumber = 7;
             VirusClicked(btnNumber);
-            Virus7.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void Virus8_Click(object sender, EventArgs e)
         {
             int btnNumber = 8;
             VirusClicked(btnNumber);
-            Virus8.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void Virus9_Click(object sender, EventArgs e)
         {
             int btnNumber = 9;
             VirusClicked(btnNumber);
-            Virus9.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void Virus10_Click(object sender, EventArgs e)
         {
             int btnNumber = 10;
             VirusClicked(btnNumber);
-            Virus10.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void Virus11_Click(object sender, EventArgs e)
         {
             int btnNumber = 11;
             VirusClicked(btnNumber);
-            Virus11.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void Virus12_Click(object sender, EventArgs e)
         {
             int btnNumber = 12;
             VirusClicked(btnNumber);
-            Virus12.BackColor = GetVirusBackGroundColor(btnNumber);
+
         }
 
         private void tryAgain_Click(object sender, EventArgs e)
